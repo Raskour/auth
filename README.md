@@ -1,3 +1,20 @@
+## Create Supabase project
+
+- Go to Supabase
+ → Sign up → Create a new project.
+
+- Note the API URL and anon/public key; you’ll need them in React.
+
+- Enable Email + Password authentication in Authentication → Settings.
+
+# API url 
+
+- https://kjusixbdnqvbxtsspmtz.supabase.co
+
+# API key anon public
+
+- eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtqdXNpeGJkbnF2Ynh0c3NwbXR6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTYyNjkwNjAsImV4cCI6MjA3MTg0NTA2MH0.Xw-rEFwB5BOYzmGcui47y1SngEA9aNVeYhquhFstEeo
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
