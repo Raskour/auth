@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const pool = require('./db');
 async function addNewuser(email,password){
+
 //check if email exists
     const existingUser = await pool.query(
         `SELECT  * FROM "users" where email=$1`,
@@ -12,7 +13,6 @@ async function addNewuser(email,password){
 throw new Error("Email exists")
     }
 // insert new user
-
 const saltRounds = 10;
 const hashedPassword = await bcrypt.hash(password, saltRounds);
 
@@ -28,6 +28,33 @@ const hashedPassword = await bcrypt.hash(password, saltRounds);
 
 }
 
+async function checkAuthentication(email,password){
+//Look up user by email
+const result = await pool.query(
+    `SELECT * FROM "users" where email = $1`,
+    [email]
+);
+
+if(result.rows.length === 0){
+    return false;
+};
+
+const user = result.rows[0];
+
+//Compare password
+
+const isMatch = await bcrypt.compare(password,user.password);
+//user.password is the hashed password stored in teh DB.
+
+if(!isMatch){
+    return false;
+}
+// return true; if not applying jwt
+
+return user; // needed so we can sign user.id or user.email into the token
+}
+
 module.exports = {
-    addNewuser
+    addNewuser,
+    checkAuthentication
 }

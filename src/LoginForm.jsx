@@ -8,8 +8,8 @@ export default function LoginForm(){
     const navigate = useNavigate()
 
     //env variables
-    const validEmail = process.env.REACT_APP_EMAIL;
-    const validPassword = process.env.REACT_APP_PASSWORD;
+    // const validEmail = process.env.REACT_APP_EMAIL;
+    // const validPassword = process.env.REACT_APP_PASSWORD;
     function handleEmail(e){
 setEmail(e.target.value)
     }
@@ -18,17 +18,43 @@ function handlePassword(e){
 setPassword(e.target.value)
 }
 
-function handleLogin(e){
-    e.preventDefault()
-    if(email=== '' || password === ''){
-        setError('Please fill in the required fields');
-        return;
+// function handleLogin(e){
+//     e.preventDefault()
+//     if(email=== '' || password === ''){
+//         setError('Please fill in the required fields');
+//         return;
+//     }
+//     if(password === validPassword && email === validEmail){
+// navigate('/home')
+//  }else{
+// setError("Invalid Credentials")
+//  }
+//}
+
+async function  handleLogin(e){
+    e.preventDefault();
+    try{
+  const res = await fetch("http://localhost:8004/login", {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body:JSON.stringify({ email,password })
+  });
+
+  const data = await res.json();
+
+  if(res.ok){
+    navigate('/home')
+  }else{
+    throw new Error(data.message)
+  }
+
+    } catch(error){
+        alert(error.message)
     }
-    if(password === validPassword && email === validEmail){
-navigate('/home')
- }else{
-setError("Invalid Credentials")
- }
+  
+    
 }
     return(
         <div>
