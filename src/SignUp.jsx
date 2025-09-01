@@ -1,9 +1,11 @@
 import {useState} from 'react'
+import { useNavigate } from 'react-router-dom';
 export default function SignUp(){
 const [signUpCredentials, setSignUpCredentials] = useState({
     email:'',
     password:''
 })
+const navigate = useNavigate()
 
     async function handleSignUp(e){
         e.preventDefault()
@@ -22,9 +24,8 @@ const [signUpCredentials, setSignUpCredentials] = useState({
         alert(data.error || "Something went wrong");
         return;
     }
-
-    
-    alert(data.message)
+        alert(data.message)
+        navigate("/")
         }catch(err){
             console.error('Error adding the user', err);
             alert("Error adding the user")
