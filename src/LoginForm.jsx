@@ -45,7 +45,12 @@ async function  handleLogin(e){
   const data = await res.json();
 
   if(res.ok){
+    
+    //save token to localstorage to use it later
+    localStorage.setItem("token", data.accessToken)
+
     navigate('/home')
+
   }else{
     throw new Error(data.message)
   }

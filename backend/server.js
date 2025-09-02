@@ -5,7 +5,7 @@ var cors = require('cors');
 
 const bodyParser = require('body-parser');
 const { addNewuser, checkAuthentication } = require('./services');
-const authMiddleware = require('./authMiddleware')
+const authMiddleware = require('./middleware/auth')
 const app = express();
 
 app.use(bodyParser.json());
@@ -45,7 +45,7 @@ app.post('/login', async(req,res) => {
             );
 
             res.json({
-                message:"You are successfully logged in",
+                message:` ${user.email}You are successfully logged in`,
                 accessToken
             });
     }catch(err){

@@ -50,10 +50,10 @@ function handlePassword(e){
             <h1>Sign up</h1>
             <form onSubmit={handleSignUp}>
                 <label>Email</label>
-                <input value={signUpCredentials.email} onChange={handleEmail}/>
+                <input type="email" value={signUpCredentials.email} onChange={handleEmail}/>
                 <div>
                 <label>Password</label>
-                <input value={signUpCredentials.password} onChange={handlePassword}/>
+                <input type="password"value={signUpCredentials.password} onChange={handlePassword}/>
                 </div>
                <button >Create Account</button>
             </form>
