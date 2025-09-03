@@ -25,7 +25,7 @@ const navigate = useNavigate()
         return;
     }
         alert(data.message)
-        navigate("/")
+        navigate("/signIn")
         }catch(err){
             console.error('Error adding the user', err);
             alert("Error adding the user")

@@ -1,11 +1,12 @@
 import { useState} from "react"
 import { Link, useNavigate } from "react-router-dom";
 
-export default function LoginForm(){
+export default function LoginForm({setToken}){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null)
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    
 
     //env variables
     // const validEmail = process.env.REACT_APP_EMAIL;
@@ -47,16 +48,18 @@ async function  handleLogin(e){
   if(res.ok){
     
     //save token to localstorage to use it later
-    localStorage.setItem("token", data.accessToken)
+    // localStorage.setItem("token", data.accessToken)
 
-    navigate('/home')
+    setToken(data.accessToken) //for storing the data in state in browser memory
+
+    navigate('/')
 
   }else{
     throw new Error(data.message)
   }
 
     } catch(error){
-        alert(error.message)
+        setError(error.message)
     }
   
     
