@@ -24,6 +24,7 @@ export default function Home({token, setToken}) {
                     throw new Error("Unauthorized or expired token")
                 }
                 const data = await res.json();
+                console.log({data})
                 setMessage(data.message)
             } catch (err) {
                 setError(err.message)

@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 export default function SignUp(){
 const [signUpCredentials, setSignUpCredentials] = useState({
     email:'',
-    password:''
+    password:'',
+    name:''
 })
 const navigate = useNavigate()
 
@@ -45,12 +46,28 @@ function handlePassword(e){
     }))
 }
 
+function handleName(e){
+  setSignUpCredentials((prev)=> ( {
+      ...prev,
+      name:e.target.value
+    }
+  ))
+}
    
   return (
     <div className="signup-container">
       <div className="signup-card">
         <h1 className="signup-title">Create Account</h1>
         <form className="signup-form" onSubmit={handleSignUp}>
+           <div className="form-group">
+            <label>Name</label>
+            <input 
+              type="text" 
+              value={signUpCredentials.name} 
+              onChange={handleName} 
+              placeholder="Enter your Name"
+            />
+          </div>
           <div className="form-group">
             <label>Email</label>
             <input 

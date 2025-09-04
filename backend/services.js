@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const pool = require('./db');
-async function addNewuser(email,password){
+async function addNewuser(email,password,name){
 
 //check if email exists
     const existingUser = await pool.query(
@@ -12,16 +12,17 @@ async function addNewuser(email,password){
         
 throw new Error("Email exists")
     }
-// insert new user
+// hash password
 const saltRounds = 10;
 const hashedPassword = await bcrypt.hash(password, saltRounds);
 
+//insert new user
     const result = await pool.query(
         `INSERT INTO "users"
-        (email,password)
-        values ($1,$2)
+        (email,password,name)
+        values ($1,$2,$3)
         RETURNING * `,
-        [email, hashedPassword]
+        [email, hashedPassword,name]
     );
 
     return result.rows[0]

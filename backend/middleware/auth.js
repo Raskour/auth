@@ -8,6 +8,7 @@ function authMiddleware(req,res,next){
     jwt.verify(token,process.env.JWT_ACCESS_SECRET, (err, user) => {
         if(err) return res.status(403).json({error: 'Invalid or expired token'});
         req.user = user; //attach decode payload
+        console.log({user})
         next();
     });
 };

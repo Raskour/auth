@@ -14,10 +14,10 @@ app.use(cors());
 
 app.post('/signUp', async(req,res) => {
    try{
-   const{email,password} = req.body;
+   const{email,password,name} = req.body;
 //    console.log({email,password})
 
-     await addNewuser(email,password);
+     await addNewuser(email,password,name);
     res.json({message:'User has been created'})
    } catch(error){
     if(error.message === "Email exists"){
@@ -34,19 +34,22 @@ app.post('/login', loginLimiter, async(req,res) => {
 
         const {email,password} = req.body;
         const user = await checkAuthentication(email,password);
+       
         if(!user){
           return  res.status(401).json({message:'Invalid credentials'});
 
         }
             //create access token
             const accessToken = jwt.sign(
-                {email:user.email}, //payload
+                {email:user.email,
+                name: user.name
+                }, //payload
                 process.env.JWT_ACCESS_SECRET, //secret key
                 {expiresIn: process.env.ACCESS_TOKEN_EXPIRE}
             );
 
             res.json({
-                message:` ${user.email}You are successfully logged in`,
+                message:` ${user.name} You are successfully logged in`,
                 accessToken
             });
     }catch(err){
@@ -56,7 +59,8 @@ app.post('/login', loginLimiter, async(req,res) => {
 })
 
 app.get('/home', authMiddleware, (req,res) => {
-    res.json({message:`Welcome ${ req.user.email}`})
+    res.json({message:`Welcome ${ req.user.name}`})
+   
 })
 
 const PORT = 8004;
