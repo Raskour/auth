@@ -64,20 +64,43 @@ async function  handleLogin(e){
   
     
 }
-    return(
-        <div>
-        <h1>Sign In</h1>
-        <form onSubmit={handleLogin}>
+  return (
+    <div className="login-container">
+      <div className="login-card">
+        <h1 className="login-title">Sign In</h1>
+
+        <form onSubmit={handleLogin} className="login-form">
+          <div className="form-group">
             <label>Email</label>
-            <input type="email" value={email} onChange={handleEmail}/>
-            <div>
-                <label>Password</label>
-            <input value={password} type="password" onChange={handlePassword}/>
-            </div>
-            <button >Login</button>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter your password"
+              required
+            />
+          </div>
+
+          {error && <p className="error-text">{error}</p>}
+
+          <button type="submit" className="login-btn">Login</button>
         </form>
-        <p>Dont have an account? <Link to='/signup'>Sign Up</Link> now</p>
-        <p style={{color:'red'}}>{error}</p>
-        </div>
-    )
+
+        <p className="signup-text">
+          Don’t have an account? <Link to="/signup">Sign Up</Link>
+        </p>
+      </div>
+    </div>
+  );
 }

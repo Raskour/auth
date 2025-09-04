@@ -5,7 +5,8 @@ var cors = require('cors');
 
 const bodyParser = require('body-parser');
 const { addNewuser, checkAuthentication } = require('./services');
-const authMiddleware = require('./middleware/auth')
+const authMiddleware = require('./middleware/auth');
+const loginLimiter = require('./middleware/loginLimiter');
 const app = express();
 
 app.use(bodyParser.json());
@@ -28,7 +29,7 @@ app.post('/signUp', async(req,res) => {
  
 })
 
-app.post('/login', async(req,res) => {
+app.post('/login', loginLimiter, async(req,res) => {
     try{
 
         const {email,password} = req.body;

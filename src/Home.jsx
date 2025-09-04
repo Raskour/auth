@@ -42,15 +42,33 @@ export default function Home({token, setToken}) {
         navigate("/signIn");
     };
 
-    return (
-        <div>
+  return (
+    <div className="home-page">
+      <header className="home-header">
+        <h1> {message && <p className="home-message">{message}</p>}
+        {error && <p className="home-error">{error}</p>}</h1>
+        <button className="home-btn" onClick={handleLogout}>Logout</button>
+      </header>
 
-            {message && <h2>{message}</h2>}
-            {error && <h2 style={{ color: "red" }}>{error}</h2>}
+      <main className="home-main">
+       
 
-            <div>
-                <button onClick={handleLogout}>Logout</button>
-            </div>
-        </div>
-    );
+        <section className="home-section">
+          <h2>Getting Started</h2>
+          <p>
+            Here you can manage your account, check your notifications, and explore all the features available to you. Use the navigation menu to access different sections of your application.
+          </p>
+        </section>
+
+        <section className="home-section">
+          <h2>Quick Actions</h2>
+          <ul>
+            <li>Update your profile</li>
+            <li>Check your recent activity</li>
+            <li>Explore new features</li>
+          </ul>
+        </section>
+      </main>
+    </div>
+  );
 }

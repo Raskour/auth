@@ -45,18 +45,36 @@ function handlePassword(e){
     }))
 }
 
-    return(
-        <div>
-            <h1>Sign up</h1>
-            <form onSubmit={handleSignUp}>
-                <label>Email</label>
-                <input type="email" value={signUpCredentials.email} onChange={handleEmail}/>
-                <div>
-                <label>Password</label>
-                <input type="password"value={signUpCredentials.password} onChange={handlePassword}/>
-                </div>
-               <button >Create Account</button>
-            </form>
+   
+  return (
+    <div className="signup-container">
+      <div className="signup-card">
+        <h1 className="signup-title">Create Account</h1>
+        <form className="signup-form" onSubmit={handleSignUp}>
+          <div className="form-group">
+            <label>Email</label>
+            <input 
+              type="email" 
+              value={signUpCredentials.email} 
+              onChange={handleEmail} 
+              placeholder="Enter your email"
+            />
+          </div>
+          <div className="form-group">
+            <label>Password</label>
+            <input 
+              type="password" 
+              value={signUpCredentials.password} 
+              onChange={handlePassword} 
+              placeholder="Enter your password"
+            />
+          </div>
+          <button type="submit" className="signup-btn">Sign Up</button>
+        </form>
+        <div className="login-text">
+          Already have an account? <a href="/signIn">Sign In</a>
         </div>
-    )
+      </div>
+    </div>
+  );
 }
